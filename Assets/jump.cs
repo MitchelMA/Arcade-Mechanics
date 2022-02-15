@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class jump : MonoBehaviour
 {
-    public float jumpHeight = 20;
+    public float jumpHeight = 5;
 
     private bool isGrounded = true;
     
-    private bool jumping = false;
-
+    private bool jumping;
     private Rigidbody body;
     
     // Start is called before the first frame update
