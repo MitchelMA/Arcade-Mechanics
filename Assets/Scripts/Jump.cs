@@ -8,6 +8,8 @@ public class Jump : MonoBehaviour
     public float JumpHeight = 5;
     public float JumpCooldown = 0.4f;
     public int MaxJumps = 2;
+
+    public int JumpParticleAmount = 10;
     
     private CharacterController _body;
     
@@ -17,11 +19,14 @@ public class Jump : MonoBehaviour
 
     private float _currentJumpCooldown = 0;
     private int _jumpsRemaining;
-    
+
+    private ParticleSystem _particleSystem;
+
     // Start is called before the first frame update
     void Start()
     {
         _body = GetComponent<CharacterController>();
+        _particleSystem = GetComponent<ParticleSystem>();
         _jumpsRemaining = MaxJumps;
     }
 
@@ -40,6 +45,13 @@ public class Jump : MonoBehaviour
         {
             _jumpsRemaining--;
             _currentJumpCooldown = JumpCooldown;
+
+            if (_jumpsRemaining < MaxJumps - 1)
+            {
+                _velocity.y = 0f;
+                _particleSystem.Emit(JumpParticleAmount);
+            }
+
             // https://en.wikipedia.org/wiki/Acceleration#Uniform_acceleration
             _velocity.y += Mathf.Sqrt(JumpHeight * -2f * gravityValue);
         }
