@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    public float JumpHeight = 5;
+    public float JumpHeight = 1;
     public float JumpCooldown = 0.4f;
     public int MaxJumps = 2;
 
@@ -26,12 +26,11 @@ public class Jump : MonoBehaviour
     void Start()
     {
         _body = GetComponent<CharacterController>();
-        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
         _jumpsRemaining = MaxJumps;
     }
 
     // Update is called once per frame
-
     void Update()
     {
         // Reset velocity y if on ground;
