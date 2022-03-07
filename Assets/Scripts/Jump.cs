@@ -19,6 +19,7 @@ public class Jump : MonoBehaviour
 
     private float _currentJumpCooldown = 0;
     private int _jumpsRemaining;
+    private Animator _animator;
 
     private ParticleSystem _particleSystem;
 
@@ -26,8 +27,9 @@ public class Jump : MonoBehaviour
     void Start()
     {
         _body = GetComponent<CharacterController>();
-        _particleSystem = GetComponent<ParticleSystem>();
+        // _particleSystem = GetComponent<ParticleSystem>();
         _jumpsRemaining = MaxJumps;
+        // _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -41,7 +43,7 @@ public class Jump : MonoBehaviour
         }
         
         // If jumping increase y velocity
-        if (Input.GetButton("Jump") && _jumpsRemaining > 0 && _currentJumpCooldown == 0)
+        if (Input.GetButtonDown("Jump") && _jumpsRemaining > 0 && _currentJumpCooldown == 0)
         {
             _jumpsRemaining--;
             _currentJumpCooldown = JumpCooldown;
@@ -49,8 +51,9 @@ public class Jump : MonoBehaviour
             if (_jumpsRemaining < MaxJumps - 1)
             {
                 _velocity.y = 0f;
-                _particleSystem.Emit(JumpParticleAmount);
+                // _particleSystem.Emit(JumpParticleAmount);
             }
+            // _animator.SetBool("Jumping", true);
 
             // https://en.wikipedia.org/wiki/Acceleration#Uniform_acceleration
             _velocity.y += Mathf.Sqrt(JumpHeight * -2f * gravityValue);
@@ -65,9 +68,16 @@ public class Jump : MonoBehaviour
     {
         // Putting this in Update() becomes unpredictable and weird
         _isGrounded = _body.isGrounded;
-        
+
+        Debug.LogFormat("IsGrounded: {0}", _isGrounded);
+
+
         // Reset jumping variable
-        if (_isGrounded) _jumpsRemaining = MaxJumps;
+        if (_isGrounded)
+        {
+            _jumpsRemaining = MaxJumps;
+            // _animator.SetBool("Jumping", false);
+        }
 
         _currentJumpCooldown = Math.Max(_currentJumpCooldown - Time.fixedDeltaTime, 0);
     }
