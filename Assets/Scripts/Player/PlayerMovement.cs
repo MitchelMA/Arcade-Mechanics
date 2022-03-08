@@ -76,7 +76,7 @@ namespace Player
             rotation = rotation * _rotationSpeed * Time.deltaTime;
             
             var forward = transform.forward;
-            forward  *= (vertInput * _moveSpeed * Time.deltaTime);
+            forward  *= (vertInput * _moveSpeed);
             forward.y = velocity.y;
             _velocity = forward;
             _body.Move(_velocity * Time.deltaTime);
