@@ -10,6 +10,8 @@ namespace Player
     {
         private PlayerMovement _movement;
 
+        private float _groundDistance = 0.125f;
+
         private Animator _animator;
         // Start is called before the first frame update
         void Start()
@@ -19,12 +21,22 @@ namespace Player
         }
         
 
-        private void Update()
+        public void FixedUpdate()
         {
             var vel = _movement.velocity;
-            var gravityDelta = -_movement.gravity * Time.fixedTime;
+            bool isGrounded = false;
+            // Use raycast bc charactercontroller is funky
+            // TODO: Add layermask for terrain only
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
+            {
+                var distance = hit.distance;
+                isGrounded = distance < _groundDistance;
+                
+                var position = transform.position;
+                Debug.DrawLine (position, position + Vector3.down * _groundDistance, Color.cyan);
+            }
             // Detect Jumping and Falling
-            if (vel.y < -gravityDelta || vel.y > gravityDelta)
+            if (!isGrounded)
             {
                 _animator.SetBool("Falling", true);
             }
