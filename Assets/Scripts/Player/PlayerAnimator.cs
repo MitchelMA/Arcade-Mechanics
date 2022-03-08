@@ -35,6 +35,7 @@ namespace Player
                 var position = transform.position;
                 Debug.DrawLine (position, position + Vector3.down * _groundDistance, Color.cyan);
             }
+            
             // Detect Jumping and Falling
             if (!isGrounded)
             {

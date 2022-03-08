@@ -15,6 +15,11 @@ namespace Player
     
         private CharacterController _body;
 
+
+        [SerializeField]
+        private float _moveSpeed = 10f;
+        private float _rotationSpeed = 200f;
+        
         private Vector3 _velocity;
         public Vector3 velocity => _velocity;
         
@@ -65,7 +70,17 @@ namespace Player
 
             // Apply gravity
             _velocity.y += gravityValue * Time.deltaTime;
+            var vertInput = Input.GetAxis("Vertical");
+            var rotation = Input.GetAxisRaw("Horizontal");
+            
+            rotation = rotation * _rotationSpeed * Time.deltaTime;
+            
+            var forward = transform.forward;
+            forward  *= (vertInput * _moveSpeed * Time.deltaTime);
+            forward.y = velocity.y;
+            _velocity = forward;
             _body.Move(_velocity * Time.deltaTime);
+            transform.Rotate(0, rotation, 0);
         }
 
         void FixedUpdate()
