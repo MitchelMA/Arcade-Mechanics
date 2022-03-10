@@ -7,10 +7,20 @@ namespace Player
     public class AnimationSound : MonoBehaviour
     {
         [SerializeField]
-        private AudioSource flapSound;
+        private AudioSource playerSource;
+
+        [SerializeField]
+        private AudioClip flap;
+
+        [SerializeField] private AudioClip footstep;
         public void Flap()
         {
-            flapSound.Play();
+            playerSource.PlayOneShot(flap);
+        }
+
+        public void Step()
+        {
+            playerSource.PlayOneShot(footstep);
         }
     }
 }
