@@ -23,8 +23,8 @@ namespace Player
         private Vector3 _velocity;
         public Vector3 velocity => _velocity;
         
+        [SerializeField]
         private float gravityValue = -9.81f;
-        public float gravity => gravityValue;
         private bool _isGrounded = true;
 
         private float _currentJumpCooldown = 0;
@@ -39,7 +39,6 @@ namespace Player
             _body = GetComponent<CharacterController>();
             _particleSystem = GetComponentInChildren<ParticleSystem>();
             _jumpsRemaining = MaxJumps;
-            // _animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -60,9 +59,8 @@ namespace Player
                 if (_jumpsRemaining < MaxJumps - 1)
                 {
                     _velocity.y = 0f;
-                    // _particleSystem.Emit(JumpParticleAmount);
+                    _particleSystem.Emit(JumpParticleAmount);
                 }
-                // _animator.SetBool("Jumping", true);
 
                 // https://en.wikipedia.org/wiki/Acceleration#Uniform_acceleration
                 _velocity.y += Mathf.Sqrt(JumpHeight * -2f * gravityValue);
@@ -92,7 +90,6 @@ namespace Player
             if (_isGrounded)
             {
                 _jumpsRemaining = MaxJumps;
-                // _animator.SetBool("Jumping", false);
             }
 
             _currentJumpCooldown = Math.Max(_currentJumpCooldown - Time.fixedDeltaTime, 0);
