@@ -9,10 +9,9 @@ namespace Player
     public class PlayerAnimator : MonoBehaviour
     {
         private PlayerMovement _movement;
-
         private float _groundDistance = 0.125f;
-
         private Animator _animator;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -23,10 +22,11 @@ namespace Player
 
         public void FixedUpdate()
         {
-            var vel = _movement.velocity;
-            bool isGrounded = false;
+            var vel = _movement.Velocity;
+            var isGrounded = false;
+            
             // Use raycast bc charactercontroller is funky
-            // TODO: Add layermask for terrain only
+            // TODO: Add layermask for terrain only or convert to small sphere collider
             if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
             {
                 var distance = hit.distance;
@@ -37,25 +37,11 @@ namespace Player
             }
             
             // Detect Jumping and Falling
-            if (!isGrounded)
-            {
-                _animator.SetBool("Falling", true);
-            }
-            else
-            {
-                _animator.SetBool("Falling", false);
-            }
+            _animator.SetBool("Falling", !isGrounded);
+            
             // Detect walking
-            // TODO: FIX IS BROKEN
             var move = vel.x + vel.z;
-            if (move != 0)
-            {
-                _animator.SetBool("Walking", true);
-            }
-            else
-            {
-                _animator.SetBool("Walking", false);
-            }
+            _animator.SetBool("Walking", move != 0);
         }
     }
 }
