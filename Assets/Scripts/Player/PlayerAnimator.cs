@@ -18,7 +18,6 @@ namespace Player
             _movement = GetComponent<PlayerMovement>();
             _animator = GetComponentInChildren<Animator>();
         }
-        
 
         public void FixedUpdate()
         {
