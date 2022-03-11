@@ -43,6 +43,9 @@ public class Projectile : MonoBehaviour
 
     private Vector3 _currentTarget;
 
+    private float _waitTime = 4;
+    private float _currentWait;
+
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -59,12 +62,19 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         // check if the target is in the field of view AND if the distance is less than the view-distance
-        if (InView(_velocity, target.position - transform.position, fieldOfView * Mathf.PI / 180) && Distance(transform.position, target.position) < viewDistance)
+        if (Vector3.Angle(_velocity, target.position - transform.position) < fieldOfView && Distance(transform.position, target.position) < viewDistance)
         {
             _currentTarget = target.position;
+            _currentWait = _waitTime;
         }
         // if not, go to the place of residence
         else
+        {
+            _currentTarget = transform.position;
+            _currentWait -= Time.deltaTime;
+        }
+
+        if(_currentWait <= 0)
         {
             _currentTarget = residencePosition;
         }
@@ -105,28 +115,6 @@ public class Projectile : MonoBehaviour
 
         // apply the steering force to the acceleration
         ApplyForce(steering);
-    }
-
-    /// <summary>
-    /// Checks if the target is in the FOV of the projectile
-    /// </summary>
-    /// <param name="VectorA">Velocity of the projectile</param>
-    /// <param name="VectorB">Position of the target RELATIVE to the projectile</param>
-    /// <param name="FOV">the FOV given in RADIANS</param>
-    /// <returns></returns>
-    private bool InView(Vector3 VectorA, Vector3 VectorB, float FOV)
-    {
-        // this method uses the scalar-projection:
-        // (VectorA.x, VectorA.y, VectorA.z) * (VectorB.x, VectorB.y, VectorB.z) <- calulates the dot product
-        // VectorA.magnitude * VectorB.magnitude * COS(THETA) <- also calculates the dot product
-        // (VectorA.x, VectorA.y, VectorA.z) * (VectorB.x, VectorB.y, VectorB.z) = VectorA.magnitude * VectorB.magnitude * COS(THETA); so we can say that:
-        // THETA = ACOS((VectorA.x, VectorA.y, VectorA.z) * (VectorB.x, VectorB.y, VectorB.z) / (VectorA.magnitude * VectorB.magnitude))
-        // now whe can check if THETA is lesser or greater than the FOV and check if it's in the FOV
-
-        float dot = VectorA.x * VectorB.x + VectorA.y * VectorB.y + VectorA.z * VectorB.z;
-        float totalMag = VectorA.magnitude * VectorB.magnitude;
-
-        return Mathf.Acos(dot / totalMag) <= FOV;
     }
 
     /// <summary>

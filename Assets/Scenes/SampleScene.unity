@@ -531,10 +531,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1745581242}
   maxSpeed: 20
-  maxForce: 100
-  landingDistance: 2
-  fieldOfView: 80
-  viewDistance: 15
+  maxForce: 1000
+  landingDistance: 1.8
+  fieldOfView: 90
+  viewDistance: 20
   residencePosition: {x: 12, y: 2, z: -9}
 --- !u!1 &904970993 stripped
 GameObject:
