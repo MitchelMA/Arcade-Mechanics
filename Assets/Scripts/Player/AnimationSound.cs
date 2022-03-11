@@ -13,12 +13,12 @@ namespace Player
         private AudioClip flap;
 
         [SerializeField] private AudioClip footstep;
-        public void Flap()
+        void Flap()
         {
             playerSource.PlayOneShot(flap);
         }
 
-        public void Step()
+        void Step()
         {
             playerSource.PlayOneShot(footstep);
         }
