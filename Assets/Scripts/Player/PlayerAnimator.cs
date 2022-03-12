@@ -9,6 +9,8 @@ namespace Player
     public class PlayerAnimator : MonoBehaviour
     {
         private PlayerMovement _movement;
+        
+        [SerializeField]
         private float _groundDistance = 0.125f;
         private Animator _animator;
         
