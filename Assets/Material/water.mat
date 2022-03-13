@@ -41,13 +41,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_09d3296c943444b08a5db0849074c6f6: 0.04
-    - _Depth: 3
-    - _Displacement: 0.04
+    - _Depth: 1
+    - _Displacement: 0.05
     - _NormalStrength: 1
-    - _Smoothness: 0.85
-    - _Strength: 0.067
+    - _Smoothness: 0.83
+    - _Strength: 0.5
     - _Tiling: 50
     m_Colors:
     - _DeepColor: {r: 0, g: 0.1675848, b: 0.49056602, a: 1}
-    - _ShallowColor: {r: 0, g: 1, b: 1, a: 0.3764706}
+    - _ShallowColor: {r: 0, g: 1, b: 1, a: 0.21960784}
   m_BuildTextureStacks: []
