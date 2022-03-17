@@ -36,56 +36,12 @@ public class FirstPersonMovement : MonoBehaviour
         LockUnlockMouse();
         HandleMovement();
     }
-
+    
     private void FixedUpdate()
     {
         _grounded = _charcon.isGrounded;
     }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if (!context.canceled && context.started && _grounded)
-        {
-            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityValue);
-        }
-    }
-    public void Look(InputAction.CallbackContext context)
-    {
-        var val = context.ReadValue<Vector2>();
-
-        var xInp = val.x * mouseSens;
-        var yInp = val.y * mouseSens;
-
-        // Only do mouse things when locked.
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            transform.Rotate(Vector3.up * xInp);
-
-            var cameraTransform = camera.transform;
-            var rot = cameraTransform.eulerAngles;
-            rot.x -= yInp;
-            rot.x = ClampAngle(rot.x, -90, 90);
-            camera.transform.eulerAngles = rot;
-        }
-    }
-
-    public void Movement(InputAction.CallbackContext context)
-    {
-        _moveInput = context.ReadValue<Vector2>();
-    }
-
-    public void ToggleSprint(InputAction.CallbackContext context)
-    {
-        _sprinting = !context.canceled;
-    }
-
-    float ClampAngle(float angle, float min, float max)
-    {
-        if (angle < 0f) angle = 360 + angle;
-        if (angle > 180f) return Mathf.Max(angle, 360 + min);
-        return Mathf.Min(angle, max);
-    }
-
+    
     private void HandleMovement()
     {
         if (_grounded && _velocity.y < 0)
@@ -124,4 +80,51 @@ public class FirstPersonMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    #region Input Callbacks
+    public void JumpCallback(InputAction.CallbackContext context)
+    {
+        if (!context.canceled && context.started && _grounded)
+        {
+            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityValue);
+        }
+    }
+    public void LookCallback(InputAction.CallbackContext context)
+    {
+        var val = context.ReadValue<Vector2>();
+
+        var xInp = val.x * mouseSens;
+        var yInp = val.y * mouseSens;
+
+        // Only do mouse things when locked.
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            transform.Rotate(Vector3.up * xInp);
+
+            var cameraTransform = camera.transform;
+            var rot = cameraTransform.eulerAngles;
+            rot.x -= yInp;
+            rot.x = ClampAngle(rot.x, -90, 90);
+            camera.transform.eulerAngles = rot;
+        }
+    }
+
+    public void MoveCallback(InputAction.CallbackContext context)
+    {
+        _moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void SprintCallback(InputAction.CallbackContext context)
+    {
+        _sprinting = !context.canceled;
+    }
+    #endregion
+    
+    float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < 0f) angle = 360 + angle;
+        if (angle > 180f) return Mathf.Max(angle, 360 + min);
+        return Mathf.Min(angle, max);
+    }
+
 }
