@@ -10,13 +10,18 @@ public class FirstPersonMovement : MonoBehaviour
 {
     [SerializeField] private float walkspeed = 4;
     [SerializeField] private float sprintspeed = 8;
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     [SerializeField] private float mouseSens = 0.075f;
+    [SerializeField] private float gravityValue = -9.81f;
+    [SerializeField] private float jumpHeight = 1;
 
     private CharacterController _charcon;
     private Vector2 _moveInput;
 
+    private Vector3 _velocity;
+
     private bool _sprinting;
+    private bool _grounded;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +37,18 @@ public class FirstPersonMovement : MonoBehaviour
         HandleMovement();
     }
 
+    private void FixedUpdate()
+    {
+        _grounded = _charcon.isGrounded;
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (!context.canceled && context.started && _grounded)
+        {
+            _velocity.y += Mathf.Sqrt(jumpHeight * -2f * gravityValue);
+        }
+    }
     public void Look(InputAction.CallbackContext context)
     {
         var val = context.ReadValue<Vector2>();
@@ -71,16 +88,28 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (_grounded && _velocity.y < 0)
+        {
+            _velocity.y = 0;
+        }
+
         // if (Input.GetButtonDown(""))
         var vInp = _moveInput.y;
         var hInp = _moveInput.x;
         //
-        var obj = transform;
-        
-        var direction = obj.forward * vInp + obj.right * hInp;
+        var objt = transform;
+
+        var direction = objt.forward * vInp + objt.right * hInp;
         direction = Vector3.ClampMagnitude(direction, 1);
+
+        // Apply gravity
+        _velocity.y += gravityValue * Time.deltaTime;
+
+        direction *= (_sprinting ? sprintspeed : walkspeed);
+
+        direction += _velocity;
         
-        _charcon.Move(direction * ( _sprinting ? sprintspeed : walkspeed) * Time.deltaTime);
+        _charcon.Move(direction * Time.deltaTime);
     }
 
     void LockUnlockMouse()
@@ -89,6 +118,7 @@ public class FirstPersonMovement : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Cursor.lockState = CursorLockMode.None;
