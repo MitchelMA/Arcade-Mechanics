@@ -10,4 +10,5 @@ Dit is de repo voor periode 3 van het eerste jaar van het MA. In deze periode we
  - Items van de grond op kunnen pakken
 
 
-Trello Board: [https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics](https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics)
+Trello Board: [https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics](https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics)  
+Retrospectives: [RETRO.md](./RETRO.md)
