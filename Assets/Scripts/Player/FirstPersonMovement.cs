@@ -15,6 +15,9 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private float mouseSens = 0.075f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float jumpHeight = 1;
+    [SerializeField] private float interactDistance = 50f;
+    [SerializeField] private Transform camera;
+    [SerializeField] private LayerMask interactMask;
 
     private CharacterController _charcon;
     private Vector2 _moveInput;
@@ -36,6 +39,21 @@ public class FirstPersonMovement : MonoBehaviour
     {
         LockUnlockMouse();
         HandleMovement();
+        HandleInteraction();
+    }
+
+    private void HandleInteraction()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(camera.position, camera.forward.normalized, out hit, interactDistance, interactMask))
+        {
+            Debug.DrawRay(camera.position, camera.forward.normalized * hit.distance, Color.yellow);
+
+            if (hit.transform.gameObject.CompareTag("Interactable"))
+            {
+                Debug.Log("Poof");
+            }
+        }
     }
     
     private void FixedUpdate()

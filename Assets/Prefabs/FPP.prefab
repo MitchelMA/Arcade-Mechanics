@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716484215141454916}
-  m_LocalRotation: {x: -0.025823431, y: -0.010876975, z: 0.009420272, w: 0.999563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -179,6 +179,11 @@ MonoBehaviour:
   mouseSens: 0.075
   gravityValue: -9.81
   jumpHeight: 2
+  interactDistance: 100
+  camera: {fileID: 3511893806285534411}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 51
 --- !u!114 &3511893804829915733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,13 +642,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638218920143859734}
-  m_LocalRotation: {x: 0.61097944, y: 0.011854289, z: 0.012993519, w: 0.7914511}
-  m_LocalPosition: {x: 0.521, y: -0.0009999089, z: 0.9549998}
+  m_LocalRotation: {x: 0.6614332, y: 0.010979115, z: 0.013740978, w: 0.7497978}
+  m_LocalPosition: {x: 0.52100015, y: -0.072, z: 0.409}
   m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 2883980918962833314}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 75.198, y: 7.793, z: 7.886}
+  m_LocalEulerAnglesHint: {x: 82.56, y: 15.517, z: 15.741}
 --- !u!33 &5006136351858809284
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -730,8 +735,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6345386470515054297}
-  m_LocalRotation: {x: 0.025823431, y: 0.010876975, z: -0.009420272, w: 0.999563}
-  m_LocalPosition: {x: 0, y: 0.4012637, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3511893805211618709}
@@ -740,4 +745,4 @@ Transform:
   - {fileID: 1672985749952115934}
   m_Father: {fileID: 3511893804829915732}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 2.971, y: 1.22, z: -1.048}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
