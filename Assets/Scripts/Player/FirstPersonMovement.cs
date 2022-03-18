@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.Video;
 
 public class FirstPersonMovement : MonoBehaviour
 {
     [SerializeField] private float walkspeed = 4;
     [SerializeField] private float sprintspeed = 8;
-    [SerializeField] private new Camera camera;
+    [SerializeField] private Transform head;
     [SerializeField] private float mouseSens = 0.075f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float jumpHeight = 1;
@@ -100,12 +101,11 @@ public class FirstPersonMovement : MonoBehaviour
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             transform.Rotate(Vector3.up * xInp);
-
-            var cameraTransform = camera.transform;
-            var rot = cameraTransform.eulerAngles;
+            
+            var rot = head.eulerAngles;
             rot.x -= yInp;
             rot.x = ClampAngle(rot.x, -90, 90);
-            camera.transform.eulerAngles = rot;
+            head.eulerAngles = rot;
         }
     }
 
