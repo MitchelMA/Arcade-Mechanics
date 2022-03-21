@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,7 +26,7 @@ namespace Player
         private Vector3 _velocity = Vector3.zero;
         private PickupItemScriptableObject targetedObj;
 
-        [SerializeField] private TextMeshProUGUI hoverText;
+        [SerializeField] [CanBeNull] private TextMeshProUGUI hoverText;
 
         private bool _sprinting;
         private bool _grounded;
@@ -84,18 +85,26 @@ namespace Player
                 if (hit.transform.gameObject.CompareTag("Interactable"))
                 {
                     targetedObj = hit.transform.gameObject.GetComponent<PickupObject>().Obj;
-                    hoverText.text = targetedObj.ItemName;
+                    updateText(targetedObj.ItemName);
                 }
                 else
                 {
                     targetedObj = null;
-                    hoverText.text = "";
+                    updateText("");
                 }
             }
             else
             {
                 targetedObj = null;
-                hoverText.text = "";
+                updateText("");
+            }
+        }
+
+        private void updateText(string inp)
+        {
+            if (hoverText != null)
+            {
+                hoverText.text = inp;
             }
         }
 
