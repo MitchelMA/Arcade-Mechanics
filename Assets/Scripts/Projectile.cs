@@ -36,14 +36,15 @@ public class Projectile : MonoBehaviour
 
     #region private vars
 
-    private float _minVelocity = 1f;
+    private const float MinVelocity = 1f;
 
     private Vector3 _velocity = new Vector3(0, 0, 0);
     private Vector3 _acceleration = new Vector3(0, 0, 0);
+    private Vector3 _direction;
 
     private Vector3 _currentTarget;
 
-    private float _waitTime = 4;
+    private const float WaitTime = 4;
     private float _currentWait;
 
     #endregion
@@ -51,9 +52,9 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         // add a start velocity to the projectile, otherwise the scalar-projection won't work
-        _velocity.x += _minVelocity;
-        _velocity.y += _minVelocity;
-        _velocity.z += _minVelocity;
+        _velocity.x += MinVelocity;
+        _velocity.y += MinVelocity;
+        _velocity.z += MinVelocity;
 
         _currentTarget = target.position;
     }
@@ -65,7 +66,7 @@ public class Projectile : MonoBehaviour
         if (Vector3.Angle(_velocity, target.position - transform.position) < fieldOfView && Distance(transform.position, target.position) < viewDistance)
         {
             _currentTarget = target.position;
-            _currentWait = _waitTime;
+            _currentWait = WaitTime;
         }
         // if not, go to the place of residence
         else
@@ -86,7 +87,7 @@ public class Projectile : MonoBehaviour
         // if it's in the vicinity of the current target, slow down 
         else
         {
-            if(_velocity.magnitude > _minVelocity)
+            if(_velocity.magnitude > MinVelocity)
                 _velocity *= 0.98f;
         }
 
@@ -134,8 +135,9 @@ public class Projectile : MonoBehaviour
     {
         _velocity += _acceleration;
         _velocity = Limit(_velocity, maxSpeed);
+    
         transform.Translate(_velocity * Time.deltaTime);
-        _acceleration = new Vector3(0, 0, 0);
+        _acceleration = Vector3.zero;
     }
 
     /// <summary>
@@ -144,7 +146,7 @@ public class Projectile : MonoBehaviour
     /// <param name="vector">vector you want to limit</param>
     /// <param name="max">max magnitude of the vector</param>
     /// <returns>the limited vector</returns>
-    private Vector3 Limit(Vector3 vector, float max)
+    private static Vector3 Limit(Vector3 vector, float max)
     {
         if (vector.magnitude == 0 || vector.magnitude < max) return vector;
         vector.Normalize();
@@ -158,7 +160,7 @@ public class Projectile : MonoBehaviour
     /// <param name="vector">input vector</param>
     /// <param name="magnitude">you want to set</param>
     /// <returns>the vector with the desired magnitude</returns>
-    private Vector3 SetMag(Vector3 vector, float magnitude)
+    private static Vector3 SetMag(Vector3 vector, float magnitude)
     {
         if (vector.magnitude == 0) return vector;
         vector.Normalize();
@@ -169,11 +171,11 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// Calculates the difference between two vectors
     /// </summary>
-    /// <param name="VectorA">The first vector</param>
-    /// <param name="VectorB">The second vector</param>
+    /// <param name="vectorA">The first vector</param>
+    /// <param name="vectorB">The second vector</param>
     /// <returns>Distance between the two vectors</returns>
-    private float Distance(Vector3 VectorA, Vector3 VectorB)
+    private static float Distance(Vector3 vectorA, Vector3 vectorB)
     {
-        return (VectorA - VectorB).magnitude;
+        return (vectorA - vectorB).magnitude;
     }
 }
