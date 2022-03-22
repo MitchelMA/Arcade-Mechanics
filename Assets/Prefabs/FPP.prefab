@@ -348,7 +348,7 @@ MonoBehaviour:
   interactMask:
     serializedVersion: 2
     m_Bits: 256
-  interactDistance: 50
+  interactDistance: 10
   hoverText: {fileID: 0}
 --- !u!114 &611089589
 MonoBehaviour:
@@ -688,14 +688,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638218920143859734}
-  m_LocalRotation: {x: 0.6614332, y: 0.010979115, z: 0.013740978, w: 0.7497978}
+  m_LocalRotation: {x: 0.7113325, y: 0.011896273, z: 0.012955079, w: 0.7026356}
   m_LocalPosition: {x: 0.52100015, y: -0.072, z: 0.409}
   m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_Children:
   - {fileID: 8956441660010736469}
   m_Father: {fileID: 2883980918962833314}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 82.56, y: 15.517, z: 15.741}
+  m_LocalEulerAnglesHint: {x: 87.867, y: 109.245, z: 109.331}
 --- !u!33 &5006136351858809284
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -839,10 +839,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8630197627843786530}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0, y: 1.078, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.324, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1672985749952115934}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -1782,7 +1782,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: aa4e08cc14a815444901ca6291ca3bb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4687,14 +4687,6 @@ PrefabInstance:
     - target: {fileID: 3511893804829915737, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
       propertyPath: m_Name
       value: FPP
-      objectReference: {fileID: 0}
-    - target: {fileID: 3511893804829915738, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
-      propertyPath: hoverText
-      value: 
-      objectReference: {fileID: 1637450363}
-    - target: {fileID: 3511893804829915738, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
-      propertyPath: mouseSens
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7294783771002421265, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
       propertyPath: hoverText
