@@ -13,10 +13,25 @@ namespace DefaultNamespace
         private List<GameObject> boxes = new List<GameObject>();
         public void Interact()
         {
-            boxes.Add(Instantiate(boxType, parent));
+            for (int x = 0; x < 5; x++)
+            {
+                for (int z = 0; z < 5; z++)
+                {
+                    for (int y = 0; y < 5; y++)
+                    {
+                        boxes.Add(Instantiate(boxType, parent.position + (new Vector3(x, y, z)), parent.rotation,
+                            parent));
+                    }
+                }
+            }
         }
 
-        private void FixedUpdate()
+        private void Start()
+        {
+            InvokeRepeating("Cleanup", 2f, 2f);
+        }
+
+        private void Cleanup()
         {
             List<GameObject> markedForDeath = new List<GameObject>();
             foreach (var box in boxes)
