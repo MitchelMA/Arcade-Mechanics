@@ -17,9 +17,8 @@ public class BoxHealth : MonoBehaviour
     public void Damage(int damage)
     {
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
-        Debug.Log(CurrentHealth);
     }
-
+    
     public bool IsAlive()
     {
         return CurrentHealth > 0;
