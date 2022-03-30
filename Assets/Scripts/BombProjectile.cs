@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BombProjectile : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BombProjectile : MonoBehaviour
     [SerializeField] private float explosionRadius = 10f;
     [SerializeField] private float maxLifetime = 10f;
     [SerializeField] private int bombDamage = 50;
+    [SerializeField] private GameObject explosion;
 
     private float _currentLifetime;
     // Start is called before the first frame update
@@ -48,6 +50,10 @@ public class BombProjectile : MonoBehaviour
                     hit.gameObject.SetActive(false);
             }
         }
+        
+        // instantiate Explosion prefab
+        Instantiate(explosion, transform.position, new Quaternion(0, 0, 0, 0));
+        
         Destroy(gameObject);
     }
 }
