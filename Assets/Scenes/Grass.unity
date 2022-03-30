@@ -4705,6 +4705,10 @@ PrefabInstance:
       propertyPath: cooldown
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3401959470413047905, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 996c188c6106cff41b0a5b948407f1d7, type: 2}
     - target: {fileID: 3511893804829915732, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
       propertyPath: m_RootOrder
       value: 3
