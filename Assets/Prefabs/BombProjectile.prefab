@@ -69,10 +69,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c415266c6747442ac0190cda854d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 30
-  Explosionpower: 50
-  ExplosionRadius: 60
-  MaxLifetime: 10
+  speed: 25
+  explosionPower: 5
+  explosionRadius: 5
+  maxLifetime: 5
+  bombDamage: 25
 --- !u!54 &3694224964313726790
 Rigidbody:
   m_ObjectHideFlags: 0

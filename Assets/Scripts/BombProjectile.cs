@@ -5,33 +5,47 @@ using UnityEngine;
 
 public class BombProjectile : MonoBehaviour
 {
-    public float Speed = 10f;
-    public float Explosionpower = 20f;
-    public float ExplosionRadius = 10f;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float explosionPower = 20f;
+    [SerializeField] private float explosionRadius = 10f;
+    [SerializeField] private float maxLifetime = 10f;
+    [SerializeField] private int bombDamage = 50;
 
-    public float MaxLifetime = 10f;
-
-    private float lifetime = 0f;
+    private float _currentLifetime;
     // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += (transform.forward) * Speed * Time.deltaTime;
+        transform.position += (transform.forward) * speed * Time.deltaTime;
         
-        lifetime += Time.deltaTime;
-        if (lifetime >= MaxLifetime)
-            Destroy(gameObject);
+        _currentLifetime += Time.deltaTime;
+        if (_currentLifetime >= maxLifetime)
+            Explode();
     }
     
     private void OnCollisionEnter(Collision collision)
     {
-        var hits = Physics.OverlapSphere(transform.position, ExplosionRadius);
+        Explode();
+    }
+
+    private void Explode()
+    {
+        var hits = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (var hit in hits)
         {
-            if(hit.gameObject.TryGetComponent(out Rigidbody body))
+            if (hit.gameObject.TryGetComponent(out Rigidbody body))
             {
-                body.AddForce((body.transform.position - transform.position).normalized * Explosionpower, ForceMode.Impulse);
+                body.AddForce((body.transform.position - transform.position).normalized * explosionPower,
+                    ForceMode.Impulse);
+            }
+
+            if (hit.gameObject.TryGetComponent(out BoxHealth health))
+            {
+                health.Damage(bombDamage);
+                if (!health.IsAlive())
+                    // Deactivate object so the box manager can clean it up
+                    hit.gameObject.SetActive(false);
             }
         }
         Destroy(gameObject);

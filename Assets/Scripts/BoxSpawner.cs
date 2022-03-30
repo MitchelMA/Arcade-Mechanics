@@ -35,7 +35,7 @@ namespace DefaultNamespace
 
         private void Cleanup()
         {
-            var markedForDeath = _boxes.Where(box => box.transform.position.y < -10f).ToList();
+            var markedForDeath = _boxes.Where(box => box.transform.position.y < -10f || !box.activeInHierarchy).ToList();
             
             foreach (var box in markedForDeath)
             {
