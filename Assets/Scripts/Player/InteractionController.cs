@@ -13,26 +13,25 @@ namespace Player
         [SerializeField] private LayerMask interactMask;
         [SerializeField] private float interactDistance = 50f;
 
-        [CanBeNull] private IInteractable targetedObj;
+        [CanBeNull] private IInteractable _targetedObj;
 
         [SerializeField] [CanBeNull] private TextMeshProUGUI hoverText;
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             RayCastInteractables();
             
             // TODO: move to input system
-            if (Keyboard.current.eKey.wasPressedThisFrame && targetedObj != null)
+            if (Keyboard.current.eKey.wasPressedThisFrame && _targetedObj != null)
             {
-                targetedObj.Interact();
+                _targetedObj.Interact();
             }
         }
     
         private void RayCastInteractables()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(headTransform.position, headTransform.forward.normalized, out hit, interactDistance,
+            if (Physics.Raycast(headTransform.position, headTransform.forward.normalized, out var hit, interactDistance,
                     interactMask))
             {
                 Debug.DrawRay(headTransform.position, headTransform.forward.normalized * hit.distance,
@@ -40,23 +39,23 @@ namespace Player
 
                 if (hit.transform.gameObject.CompareTag("Interactable"))
                 {
-                    targetedObj = hit.transform.gameObject.GetComponent<IInteractable>();
-                    updateText($"[E] {targetedObj.GetHoverText()}");
+                    _targetedObj = hit.transform.gameObject.GetComponent<IInteractable>();
+                    if (_targetedObj != null) UpdateText($"[E] {_targetedObj.GetHoverText()}");
                 }
                 else
                 {
-                    targetedObj = null;
-                    updateText("");
+                    _targetedObj = null;
+                    UpdateText("");
                 }
             }
             else
             {
-                targetedObj = null;
-                updateText("");
+                _targetedObj = null;
+                UpdateText("");
             }
         }
     
-        private void updateText(string inp)
+        private void UpdateText(string inp)
         {
             if (hoverText != null)
             {

@@ -9,12 +9,12 @@ namespace Player
         [SerializeField] private float mouseSens = 0.075f;
         [SerializeField] private Transform headTransform;
 
-        private Vector2 _lookInput = Vector2.zero;
+        public Vector2 LookInput { get; private set; } = Vector2.zero;
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            var val = _lookInput;
+            var val = LookInput;
 
             var xInp = val.x * mouseSens;
             var yInp = val.y * mouseSens;
@@ -22,8 +22,7 @@ namespace Player
             float ClampAngle(float angle, float min, float max)
             {
                 if (angle < 0f) angle = 360 + angle;
-                if (angle > 180f) return Mathf.Max(angle, 360 + min);
-                return Mathf.Min(angle, max);
+                return angle > 180f ? Mathf.Max(angle, 360 + min) : Mathf.Min(angle, max);
             }
 
             // Only do mouse things when locked.
@@ -40,7 +39,7 @@ namespace Player
     
         public void LookCallback(InputAction.CallbackContext context)
         {
-            _lookInput = context.ReadValue<Vector2>();
+            LookInput = context.ReadValue<Vector2>();
         }
     
         private void OnApplicationFocus(bool hasFocus)

@@ -18,9 +18,8 @@ namespace Player
 
         private Vector3 _velocity = Vector3.zero;
 
-        public Vector3 Movement => _movement;
-        private Vector3 _movement = Vector3.zero;
-        
+        public Vector3 Movement { get; private set; } = Vector3.zero;
+
         private bool _sprinting;
 
         public bool Grounded => _grounded;
@@ -28,7 +27,7 @@ namespace Player
 
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _charcon = GetComponent<CharacterController>();
             Cursor.lockState = CursorLockMode.Locked;
@@ -36,7 +35,7 @@ namespace Player
         
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             LockUnlockMouse();
             HandleMovement();
@@ -57,22 +56,22 @@ namespace Player
             var vInp = _moveInput.y;
             var hInp = _moveInput.x;
             
-            var objt = transform;
+            var objTransform = transform;
 
-            _movement = objt.forward * vInp + objt.right * hInp;
-            _movement = Vector3.ClampMagnitude(_movement, 1);
+            Movement = objTransform.forward * vInp + objTransform.right * hInp;
+            Movement = Vector3.ClampMagnitude(Movement, 1);
 
             // Apply gravity
             _velocity.y += gravityValue * Time.deltaTime;
 
-            _movement *= (_sprinting ? sprintspeed : walkspeed);
+            Movement *= (_sprinting ? sprintspeed : walkspeed);
 
-            _movement += _velocity;
+            Movement += _velocity;
 
-            _charcon.Move(_movement * Time.deltaTime);
+            _charcon.Move(Movement * Time.deltaTime);
         }
 
-        void LockUnlockMouse()
+        private void LockUnlockMouse()
         {
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
@@ -86,7 +85,6 @@ namespace Player
         }
 
         #region Input Callbacks
-
         public void JumpCallback(InputAction.CallbackContext context)
         {
             if (!context.canceled && context.started && _grounded)
