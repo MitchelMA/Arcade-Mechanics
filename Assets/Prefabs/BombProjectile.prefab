@@ -70,10 +70,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  explosionPower: 5
-  explosionRadius: 5
+  explosionPower: 25
+  explosionRadius: 2.5
   maxLifetime: 5
-  bombDamage: 25
+  bombDamage: 50
   explosion: {fileID: 5015183430841197018, guid: 50500c3dad9b87845b20d62a260821a3, type: 3}
 --- !u!54 &3694224964313726790
 Rigidbody:

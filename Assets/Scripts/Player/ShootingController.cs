@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +12,8 @@ namespace Player
         [SerializeField] private LayerMask mask;
         [SerializeField] private float cooldown = 0.5f;
         [SerializeField] private AudioClip shootSound;
-
+        [SerializeField] private AudioSource audioSource;
+        
         private float _remainingCooldown;
 
         // Update is called once per frame
@@ -35,10 +37,7 @@ namespace Player
                 
                 // shooting sound
                 
-                AudioSource shootAudio = gameObject.AddComponent<AudioSource>();
-                shootAudio.clip = shootSound;
-                shootAudio.Play(0);
-
+                audioSource.PlayOneShot(shootSound);
                 _remainingCooldown = cooldown;
             }
         }
