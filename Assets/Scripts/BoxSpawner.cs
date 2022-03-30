@@ -17,7 +17,7 @@ namespace DefaultNamespace
             {
                 for (int z = 0; z < 10; z+=2)
                 {
-                    for (int y = 0; y < 200; y+=2)
+                    for (int y = 0; y < 10; y+=2)
                     {
                         boxes.Add(Instantiate(boxType, parent.position + (new Vector3(x, y, z)), parent.rotation,
                             parent));
