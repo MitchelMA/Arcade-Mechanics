@@ -10,6 +10,7 @@ namespace Player
         [SerializeField] private Transform headPoint;
         [SerializeField] private LayerMask mask;
         [SerializeField] private float cooldown = 0.5f;
+        [SerializeField] private AudioClip shootSound;
 
         private float _remainingCooldown;
 
@@ -31,6 +32,12 @@ namespace Player
 
                 firePoint.LookAt(shootLoc, Vector3.up);
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
+                
+                // shooting sound
+                
+                AudioSource shootAudio = gameObject.AddComponent<AudioSource>();
+                shootAudio.clip = shootSound;
+                shootAudio.Play(0);
 
                 _remainingCooldown = cooldown;
             }

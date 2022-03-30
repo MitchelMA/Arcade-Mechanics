@@ -368,6 +368,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 311
+  cooldown: 0.5
+  shootSound: {fileID: 8300000, guid: e59e63a5d26b5b246953730084d7a85f, type: 3}
 --- !u!1 &3511893805211618708
 GameObject:
   m_ObjectHideFlags: 0
