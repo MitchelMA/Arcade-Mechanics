@@ -2,12 +2,13 @@
  - Bas Kuipers
  - Mitchel Vonk
 
-Dit is de repo voor periode 3 van het eerste jaar van het MA. In deze periode werken we met Unity aan verschillende Game-Mechanics; het is dus nog niet per se de bedoeling dat we het tot één game maken.
+Dit is onze GitHub repository voor periode 3 van het eerste jaar van het MA. In deze periode werken we met Unity aan verschillende Game-Mechanics.  
+We maken kleine stukjes van een game: het oppakken van voorwerpen; het beschieten van tegenstanders; rondlopen; springen, etc... het is nog niet de bedoeling dat we er één geheel van maken, maar dat mag wel en zoiets proberen wij ook.
 
 ## Voorbeelden van mechanics
  - Rondlopen in een wereld
  - Springen om op platformen te kunnen komen of projectielen te ontwijken
- - Items van de grond op kunnen pakken
+ - GameObjects kunnen beschieten met projectiles
 
 
 Trello Board: [https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics](https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics)  
