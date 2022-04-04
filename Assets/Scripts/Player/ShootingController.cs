@@ -13,8 +13,10 @@ namespace Player
         [SerializeField] private float cooldown = 0.5f;
         [SerializeField] private AudioClip shootSound;
         [SerializeField] private AudioSource audioSource;
+        [SerializeField] private Animator animator;
         
         private float _remainingCooldown;
+        private static readonly int Fire = Animator.StringToHash("fire");
 
         // Update is called once per frame
         private void Update()
@@ -36,9 +38,11 @@ namespace Player
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
                 
                 // shooting sound
-                
                 audioSource.PlayOneShot(shootSound);
                 _remainingCooldown = cooldown;
+                
+                // shooting animation
+                animator.SetTrigger(Fire);
             }
         }
     }
