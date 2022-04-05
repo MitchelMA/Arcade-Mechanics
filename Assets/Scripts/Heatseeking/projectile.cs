@@ -24,6 +24,7 @@ public class projectile : MonoBehaviour
 
     [SerializeField] private float fieldOfView = 45;
     
+    //MUST: the code must have a non-zero velocity-vector for it to work, so it must have a starting-velocity;
     [SerializeField]
     private Vector3 velocity;
     #endregion
