@@ -9,6 +9,7 @@ We maken kleine stukjes van een game: het oppakken van voorwerpen; het beschiete
  - Rondlopen in een wereld
  - Springen om op platformen te kunnen komen of projectielen te ontwijken
  - GameObjects kunnen beschieten met projectiles
+ - Hittezoekend projectiel
 
 
 Trello Board: [https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics](https://trello.com/b/GKsNWB1r/f2m3bo-arcade-mechanics)  
