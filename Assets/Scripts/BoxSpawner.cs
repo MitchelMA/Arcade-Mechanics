@@ -12,7 +12,7 @@ public class BoxSpawner : MonoBehaviour, IInteractable
 
     private readonly List<GameObject> _boxes = new List<GameObject>();
 
-    public void Interact()
+    public void Interact(GameObject p)
     {
         for (var x = 0; x < 10; x += 2)
         {

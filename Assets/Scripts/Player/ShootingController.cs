@@ -18,11 +18,16 @@ namespace Player
         private float _remainingCooldown;
         private static readonly int Fire = Animator.StringToHash("fire");
 
+        public void SetProjectile(GameObject proj)
+        {
+            projectile = proj;
+        }
+
         // Update is called once per frame
         private void Update()
         {
             _remainingCooldown = Mathf.Max(_remainingCooldown - Time.deltaTime, 0);
-            if (Mouse.current.leftButton.wasPressedThisFrame && _remainingCooldown == 0)
+            if (Mouse.current.leftButton.isPressed && _remainingCooldown == 0)
             {
                 Vector3 shootLoc;
                 if (Physics.Raycast(headPoint.position, headPoint.forward, out RaycastHit hit, 1000f, mask))

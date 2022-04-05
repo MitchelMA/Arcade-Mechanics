@@ -25,7 +25,7 @@ namespace Player
             // TODO: move to input system
             if (Keyboard.current.eKey.wasPressedThisFrame && _targetedObj != null)
             {
-                _targetedObj.Interact();
+                _targetedObj.Interact(gameObject);
             }
         }
     
