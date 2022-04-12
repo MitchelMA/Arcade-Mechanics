@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Heatseeking
 {
-    public class Projectile : MonoBehaviour
+    public class SeekingProjectile : MonoBehaviour
     {
         #region Publics
 
@@ -20,29 +20,44 @@ namespace Heatseeking
         private float maxForce = 0.4f;
 
         [SerializeField] private float fieldOfView = 45;
+
+        [SerializeField] private int bombDamage = 50;
+        [SerializeField] private float explosionRadius = 5f;
+        [SerializeField] private float explosionPower = 10f;
+        [SerializeField] private GameObject explosion;
     
-        //MUST: the code must have a non-zero velocity-vector for it to work, so it must have a starting-velocity;
-        [SerializeField]
-        private Vector3 velocity;
+        [SerializeField] private float maxLifetime = 10f;
+        [SerializeField] private float seekAtLifetime = 1f;
         #endregion
 
         #region Privates
+        private Vector3 _velocity;
+        private float _currentLifetime = 0f;
         #endregion
 
-        // Start is called before the first frame update
-        void Start()
+        private void OnCollisionEnter(Collision collision)
         {
+            Explode();
         }
 
         // Update is called once per frame
         void Update()
         {
+
             // Search all GameObjects with a tag "HeatSeekTarget"
             var targets = GameObject.FindGameObjectsWithTag("HeatSeekTarget");
             // find the best target
             var best = FindBest(targets);
             
-            Seek(best.transform.position, fieldOfView);
+            if (best != null && _currentLifetime > seekAtLifetime)
+                Seek(best.transform.position, fieldOfView);
+            else
+                transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
+            
+            if(_currentLifetime > maxLifetime)
+                Explode();
+            
+            _currentLifetime += Time.deltaTime;
         }
 
         private void Seek(Vector3 target, float FOV)
@@ -60,23 +75,24 @@ namespace Heatseeking
             if (angle > FOV)
                 steering = Vector3.zero;
             else
-                steering = desired - velocity;
+                steering = desired - _velocity;
         
             // limit the steering vector and apply it to the velocity
-            steering = Limit(steering, maxForce * Time.deltaTime);
+            steering = Vector3.ClampMagnitude(steering, maxForce * Time.deltaTime);
             ApplyForce(steering);
         }
 
         private void ApplyForce(Vector3 force)
         {
             // add the force to the velocity
-            velocity += force;
+            _velocity += force;
             // limit the velocity by the max speed
-            velocity = Limit(velocity, speed * Time.deltaTime);
+            _velocity = Vector3.ClampMagnitude(_velocity, speed * Time.deltaTime);
             // calculate the new direction
-            Vector3 newDir = Vector3.RotateTowards(transform.eulerAngles, velocity, 2 * Mathf.PI, 2*maxForce);
+            Vector3 newDir = Vector3.RotateTowards(transform.eulerAngles, _velocity, 2 * Mathf.PI, 2*maxForce);
             // rotate according to this new direction
             transform.rotation = Quaternion.LookRotation(newDir);
+            
             // translate forwards
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
@@ -88,6 +104,8 @@ namespace Heatseeking
         /// <returns>The best possible GameObject from the array</returns>
         private GameObject FindBest(GameObject[] objects)
         {
+            if (objects.Length == 0)
+                return null;
             var currentBest = objects[0];
             var bestAngle = 360f;
             var bestDistance = Mathf.Infinity;
@@ -124,18 +142,31 @@ namespace Heatseeking
             vector *= mag;
             return vector;
         }
-        /// <summary>
-        /// Method to limit a vector with a certain magnitude
-        /// </summary>
-        /// <param name="vector">Input vector</param>
-        /// <param name="limit">Maximum magnitude</param>
-        /// <returns>A vector of which the magnitude cannot be greater than the specified limit</returns>
-        private Vector3 Limit(Vector3 vector, float limit)
+
+        private void Explode()
         {
-            if (vector.magnitude == 0 || vector.magnitude < limit) return vector;
-            vector.Normalize();
-            vector *= limit;
-            return vector;
+            var hits = Physics.OverlapSphere(transform.position, explosionRadius);
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject.TryGetComponent(out Rigidbody body))
+                {
+                    body.AddForce((body.transform.position - transform.position).normalized * explosionPower,
+                        ForceMode.Impulse);
+                }
+
+                if (hit.gameObject.TryGetComponent(out BoxHealth health))
+                {
+                    health.Damage(bombDamage);
+                    if (!health.IsAlive())
+                        // Deactivate object so the box manager can clean it up
+                        hit.gameObject.SetActive(false);
+                }
+            }
+        
+            // instantiate Explosion prefab
+            Instantiate(explosion, transform.position, new Quaternion(0, 0, 0, 0));
+        
+            Destroy(gameObject);
         }
     }
 }
