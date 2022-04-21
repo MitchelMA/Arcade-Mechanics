@@ -51,7 +51,7 @@ namespace Heatseeking
         {
 
             // Search all GameObjects with a tag "HeatSeekTarget"
-            var targets = GameObject.FindGameObjectsWithTag("HeatSeekTarget");
+            var targets = GameObject.FindGameObjectsWithTag("Enemy");
             // find the best target
             var best = FindBest(targets);
             

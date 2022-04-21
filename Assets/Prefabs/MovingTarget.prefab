@@ -248,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7100322223729692291, guid: 7f952b4516870d645a8b8ee2c26d0ff8, type: 3}
       propertyPath: m_TagString
-      value: HeatSeekTarget
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7297578984525748214, guid: 7f952b4516870d645a8b8ee2c26d0ff8, type: 3}
       propertyPath: m_RootOrder
