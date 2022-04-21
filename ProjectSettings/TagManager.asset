@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Interactable
   - Enemy
-  - HeatSeekTarget
   layers:
   - Default
   - TransparentFX

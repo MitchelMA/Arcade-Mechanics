@@ -4852,7 +4852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed209d6243906345bc67570099eb923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 18
   maxForce: 0.1
   fieldOfView: 180
   bombDamage: 50
@@ -4860,7 +4860,7 @@ MonoBehaviour:
   explosionPower: 10
   explosion: {fileID: 6456944735506411529, guid: d4e70a20e5d35e948b5c0d9d01868c2f, type: 3}
   maxLifetime: 10
-  seekAtLifetime: 0.2
+  seekAtLifetime: 0.3
 --- !u!54 &2199016131961903937
 Rigidbody:
   m_ObjectHideFlags: 0
