@@ -19,6 +19,7 @@ namespace Heatseeking
         [SerializeField]
         private float maxForce = 0.4f;
 
+        [Range(0, 180)]
         [SerializeField] private float fieldOfView = 45;
 
         [SerializeField] private int bombDamage = 50;

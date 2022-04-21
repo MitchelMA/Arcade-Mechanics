@@ -4851,9 +4851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed209d6243906345bc67570099eb923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 15
   maxForce: 0.4
-  fieldOfView: 45
+  fieldOfView: 180
   bombDamage: 50
   explosionRadius: 5
   explosionPower: 10
