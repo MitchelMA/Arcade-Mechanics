@@ -3569,7 +3569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ae0ba6bbc5a024a82e48e309f45e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5015183430841197018, guid: 50500c3dad9b87845b20d62a260821a3, type: 3}
+  projectilePrefab: {fileID: 5632086565859747800, guid: 6905b8fdc6aa1dc49850a3771924f78b, type: 3}
 --- !u!136 &1637856428
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5071,7 +5071,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 611089589, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
       propertyPath: cooldown
-      value: 0.1
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 611089589, guid: 1229010e5167e4646a561dcaef2dd1d1, type: 3}
       propertyPath: projectile
