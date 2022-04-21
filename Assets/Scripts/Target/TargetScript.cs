@@ -33,32 +33,26 @@ namespace Target
         // Update is called once per frame
         void Update()
         {
-            transform.position = Vector3.Lerp(startPoint.position, endPoint.position, _t);
+            transform.position = Vector3.Lerp(startPoint.position, endPoint.position, _t); 
             // check for direction
             if (_dir)
             {
-                _t += speed * Time.deltaTime;
+                _t = Mathf.Min(_t + speed * Time.deltaTime, 1f);
                 // if t greater than 1, change direction
-                if (_t > 1)
+                if (_t >= 1f)
                 {
                     _dir = false;
                 }
             }
             else
             {
-                _t -= speed * Time.deltaTime;
+                _t = Mathf.Max(_t - speed * Time.deltaTime, 0f);
                 // if t less than 1, chnge direction
-                if (_t < 0)
+                if (_t <= 0f)
                 {
                     _dir = true;
                 }
             }
-        
-            // set boundaries for t
-            if (_t > 1)
-                _t = 1;
-            if (_t < 0)
-                _t = 0;
         }
     }
 }
