@@ -41,6 +41,11 @@ namespace Heatseeking
             Explode();
         }
 
+        private void Start()
+        {
+            _velocity = transform.forward;
+        }
+
         // Update is called once per frame
         void Update()
         {

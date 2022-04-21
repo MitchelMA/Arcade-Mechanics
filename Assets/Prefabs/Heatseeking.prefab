@@ -4853,12 +4853,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  maxForce: 0.4
+  maxForce: 0.1
   fieldOfView: 180
   bombDamage: 50
   explosionRadius: 5
   explosionPower: 10
-  explosion: {fileID: 5015183430841197018, guid: 50500c3dad9b87845b20d62a260821a3, type: 3}
+  explosion: {fileID: 6456944735506411529, guid: d4e70a20e5d35e948b5c0d9d01868c2f, type: 3}
   maxLifetime: 10
   seekAtLifetime: 0.2
 --- !u!54 &2199016131961903937
